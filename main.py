@@ -92,10 +92,10 @@ for idx, data in df.iterrows():
         del filtered_payload['status']
 
     # Check if 'status' key exists in the dictionary
-    if 'status' in filtered_payload:
-        print('status =', filtered_payload['status'])
-    else:
-        print("'status' key does not exist in the dictionary.")
+    # if 'status' in filtered_payload:
+    #     print('status =', filtered_payload['status'])
+    # else:
+    #     print("'status' key does not exist in the dictionary.")
     ###############################################################
     ########check if 'status' condition is valid##################
     # Define the allowed fill
@@ -105,10 +105,10 @@ for idx, data in df.iterrows():
         del filtered_payload['fill']
 
     # Check if 'fill' key exists in the dictionary
-    if 'fill' in filtered_payload:
-         print('fill =', filtered_payload['fill'])
-    else:
-         print("'fill' key does not exist in the dictionary.")
+    # if 'fill' in filtered_payload:
+    #      print('fill =', filtered_payload['fill'])
+    # else:
+    #      print("'fill' key does not exist in the dictionary.")
     ###############################################################
     ########check if 'final_delivery' condition is valid##################
     # Define the allowed final_delivery
@@ -117,13 +117,25 @@ for idx, data in df.iterrows():
     if 'fill' in filtered_payload and filtered_payload['final_delivery'] not in allowed_final_delivery:
         del filtered_payload['final_delivery']
 
-    # Check if 'fill' key exists in the dictionary
-    if 'final_delivery' in filtered_payload:
-         print('final_delivery =', filtered_payload['final_delivery'])
-    else:
-         print("'final_delivery' key does not exist in the dictionary.")
+    # Check if 'final_delivery' key exists in the dictionary
+    # if 'final_delivery' in filtered_payload:
+    #      print('final_delivery =', filtered_payload['final_delivery'])
+    # else:
+    #      print("'final_delivery' key does not exist in the dictionary.")
     ###############################################################
+    ########check if 'dedupe_external_id' condition is valid##################
+    # Define the allowed dedupe_external_id
+    allowed_dedupe_external_id = ['true', 'false']
 
+    if 'fill' in filtered_payload and filtered_payload['dedupe_external_id'] not in allowed_dedupe_external_id:
+        del filtered_payload['dedupe_external_id']
+
+    # Check if 'dedupe_external_id' key exists in the dictionary
+    # if 'dedupe_external_id' in filtered_payload:
+    #      print('dedupe_external_id =', filtered_payload['dedupe_external_id'])
+    # else:
+    #      print("'dedupe_external_id' key does not exist in the dictionary.")
+    ###############################################################
 
     response = requests.post(url, data=json.dumps(filtered_payload), headers=headers)
     print(response.text)
