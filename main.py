@@ -25,7 +25,7 @@ df['as_of'] = pd.to_datetime(df['as_of'], dayfirst=True).dt.strftime(date_format
 
 print(df)
 
-#csv to ticket mapping
+########csv to ticket mapping#######################################
 input1 = 'as_of'
 input2 = 'commodity'
 input3 = 'volume'
@@ -62,6 +62,7 @@ payload = {
 #print(response.text)
 
 ####################################################################
+#load data into
 for idx, data in df.iterrows():
     payload = {
         'fulfillment_date': data[input1],
@@ -79,7 +80,7 @@ for idx, data in df.iterrows():
         "custom_field_name": data[input13]
     }
 
-    ###################FILTER DATA###################################
+#######################FILTER DATA###################################
     #remove n/a data from package
     filtered_payload = {key: value for key, value in payload.items() if value is not None and value != '' }
 
@@ -109,7 +110,19 @@ for idx, data in df.iterrows():
     else:
          print("'fill' key does not exist in the dictionary.")
     ###############################################################
-    #
+    ########check if 'final_delivery' condition is valid##################
+    # Define the allowed final_delivery
+    allowed_final_delivery = ['true', 'false']
+
+    if 'fill' in filtered_payload and filtered_payload['final_delivery'] not in allowed_final_delivery:
+        del filtered_payload['final_delivery']
+
+    # Check if 'fill' key exists in the dictionary
+    if 'final_delivery' in filtered_payload:
+         print('final_delivery =', filtered_payload['final_delivery'])
+    else:
+         print("'final_delivery' key does not exist in the dictionary.")
+    ###############################################################
 
 
     response = requests.post(url, data=json.dumps(filtered_payload), headers=headers)
