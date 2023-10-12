@@ -9,8 +9,8 @@ url = "https://app.molecule.io/api/v2/inventory/tickets"
 headers = {
     "accept": "application/json",
     "content-type": "application/json",
-    "x-email": "ccheong@qsol.co.uk",
-    "x-token": "4sGHjdrxpD8WEri4GLc7"
+    "x-email": "ccheong_nx@qsol.co.uk",
+    "x-token": "yBQBU4Bbzvhu6UzhmrZ2"
 }
 
 df = pd.read_csv(r"C:\Users\cheng\PycharmProjects\MoleculeTicketInjection\Test Data\InvenTest.csv", header=0)
