@@ -3,7 +3,7 @@ import requests
 import json
 import re
 
-url = "https://app.molecule.io/api/v2/inventory/tickets"
+url = "https://ct-eu.molecule.io/api/v2/inventory/tickets"
 
 #molecule account x-email & x-token goes here
 headers = {
